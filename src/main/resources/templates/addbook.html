@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Add New Book</h1>
+    <form th:action="@{/addbook}" method="post" th:object="${book}">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" class="form-control" th:field="*{title}" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" class="form-control" th:field="*{author}" required>
+        </div>
+        <div class="form-group">
+            <label for="owner">Owner</label>
+            <select id="owner" name="owner" class="form-control" th:field="*{owner}" required>
+                <option th:each="person : ${people}" th:value="${person.id}"
+                        th:text="${person.name} + ' ' + ${person.surname}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Add Book</button>
+    </form>
+</div>
+</body>
+</html>
